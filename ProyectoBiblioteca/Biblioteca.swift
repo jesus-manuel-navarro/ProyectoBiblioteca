@@ -8,87 +8,69 @@
 import SwiftUI
 
 struct Biblioteca: View {
-    @StateObject var viewModel : ClaseViewModel
+    var libros = [ Libro(name: "Cebra", image: "portadalibros"),
+                     Libro(name: "Leon", image: "portadalibros"),
+                   Libro(name: "Bongo", image: "portadalibros")]
+    
     var body: some View {
-        NavigationView{
-            List{
-                ForEach(
-                    viewModel.librosDB.sorted(by: viewModel.almacen.displayOrder.predicate())){libro in
-                    
-                    if viewModel.shouldShowItem(libro: libro) {
-                        BasicImageRow(libro: libro)
-                            .contextMenu {
-                                Button(action: {
-                                    // mark the selected restaurant as check-in
-                                    viewModel.checkIn(libro: libro)
-                                    viewModel.fetchLibros()
-                                }) {
-                                    HStack {
-                                        Text("Check-in")
-                                        Image(systemName: "checkmark.seal.fill")
-                                    }
-                                }
-                                Button(action: {
-                                    // delete the selected restaurant
-                                    viewModel.delete(restaurant: restaurant)
-                                    viewModel.fetchRestaurants()
-                                    
-                                }) {
-                                    HStack {
-                                        Text("Delete")
-                                        Image(systemName: "trash")
-                                    }
-                                }
-                                Button(action: {
-                                    // mark the selected restaurant as favorite
-                                    viewModel.setFavorite(restaurant: restaurant)
-                                    viewModel.fetchRestaurants()
-                                    
-                                }) {
-                                    HStack {
-                                        Text("Favorite")
-                                        Image(systemName: "star")
-                                    }
-                                }
-                            }
-                            .onTapGesture {
-                                viewModel.selectedLibro = libro
-                            }
-                        }
-                    }
-               /* .onDelete { (indexSet) in
-                    viewModel.libros.remove(atOffsets: indexSet)
-                }*/
-            }
-            
-            .navigationBarTitle("Biblioteca")
-            
-            //PARA CREAR EL BOTÓN DE LA VISTA SETTINGS
-            .navigationBarItems(trailing:
-                HStack{
-                    Button(action: {
-                    viewModel.showSettings = true
-                    }, label: {
-                        Image(systemName: "gear").font(.title)
-                            .foregroundColor(.black)
-                        }
-                    )
-                    Button ("SignOut") {
-                   // authViewModel.signOut()
+        NavigationView {
+            List {
+                ForEach(libros) { libro in
+                    NavigationLink(destination:LibroDetailView(libro: libro)){
+                        MostrarEnListView(libro: libro)
+                        
                     }
                 }
-            )
-           /* .sheet(isPresented: $viewModel.showSettings) {
-                SettingView().environmentObject(viewModel.almacen)
-            }   */
+                               
+            }.navigationBarTitle("Mi Biblioteca", displayMode: .inline)
+        }
+        
+    }
+}
+
+struct Biblioteca_Previews: PreviewProvider {
+    static var previews: some View {
+        Biblioteca()
+    }
+}
+
+struct LibroDetailView: View {
+    var libro: Libro
+    var body: some View {
+        VStack {
+            Text(libro.name)
+                .font(.system(.title, design: .rounded))
+                .fontWeight(.black)
+                .foregroundColor(.black)
+            
+            Image(libro.image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 400)
+                
+            Spacer()
             
         }
         
     }
 }
 
-/*struct Biblioteca_Previews: PreviewProvider {
-    static var previews: some View {
-        Biblioteca()
+struct Libro: Identifiable {
+    var id = UUID()
+    var name: String
+    var image: String
+}
+
+struct MostrarEnListView: View {
+    var libro: Libro
+    var body: some View {
+        HStack {
+            Image(libro.image)
+                .resizable()
+                .frame(width: 40, height: 40)
+                .cornerRadius(5)
+            Text(libro.name)
+        }
     }
-}*/
+}
+
