@@ -9,8 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
+                NavigationView {
+            VStack{
+                Image("portadalibros")
+                    .resizable()
+                    .ignoresSafeArea()
+                    .scaledToFill()
+                
+                Text("¿Qué leemos hoy?")
+                    .font(.title)
+                    .fontWeight(.bold)
+                Spacer()
+            }
             .padding()
+        
+        .navigationBarTitle("Proyecto Biblioteca")
+        .navigationBarItems(trailing:
+                            HStack{
+                                Button("Biblioteca") {
+                                //accion para el botón
+                                }
+                                Button("Blog"){
+                                    //accion para el botón
+                                }
+                                Button ("Login") {
+                                }
+                            }
+                            .foregroundColor(.gray)
+                        )
+        }
     }
 }
 
