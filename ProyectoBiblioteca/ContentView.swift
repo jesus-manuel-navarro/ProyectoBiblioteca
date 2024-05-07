@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-                NavigationView {
+        NavigationView {
             VStack{
                 Image("portadalibros")
                     .resizable()
@@ -24,19 +24,24 @@ struct ContentView: View {
             .padding()
         
         .navigationBarTitle("Proyecto Biblioteca")
-        .navigationBarItems(trailing:
-                            HStack{
-                                Button("Biblioteca") {
-                                //accion para el botón
-                                }
-                                Button("Blog"){
-                                    //accion para el botón
-                                }
-                                Button ("Login") {
-                                }
-                            }
-                            .foregroundColor(.gray)
-                        )
+                    
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                NavigationLink(destination: Biblioteca()) {
+                    Text("Biblioteca")
+                }
+                NavigationLink(destination: Blog()) {
+                    Text("Blog")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: Login()) {
+                    Text("Login")
+                }
+            }
+        }
+        .foregroundColor(.gray)
+        
         }
     }
 }
