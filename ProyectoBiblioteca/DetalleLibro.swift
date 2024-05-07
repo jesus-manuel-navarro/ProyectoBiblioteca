@@ -14,6 +14,7 @@ struct DetalleLibro: View {
             Image(libro.image)
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
+                //.scaledToFill()
                 
             HStack{
                // Spacer()

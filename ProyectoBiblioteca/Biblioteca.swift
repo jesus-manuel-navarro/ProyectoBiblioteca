@@ -17,19 +17,28 @@ struct Biblioteca: View {
                    Libro(titulo: "El conde de Montecristo", image: "condeMontecristo", autor: "Alejandro Dumas", genero: "Novela histórica", sinopsis: "La novela narra la vida de Edmundo Dantés desde que fue apresado injustamente en el castillo de If por un falso cargo de traición, hasta que regresa años después, convertido en el Conde de Montecristo, para ejercer su venganza sobre aquellos que destruyeron su vida.")]
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(libros) { libro in
-                    NavigationLink(destination:DetalleLibro(libro: libro)){
-                        MostrarEnListView(libro: libro)
-                            .onTapGesture{
-                                self.selectedLibro = libro
-                                DetalleLibro(libro:libro)
-                            }
+       
+        VStack {
+            Text("Mi Biblioteca")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding()
+            NavigationView {
+                List {
+                    ForEach(libros) { libro in
+                        NavigationLink(destination:DetalleLibro(libro: libro)){
+                            MostrarEnListView(libro: libro)
+                                .onTapGesture{
+                                    self.selectedLibro = libro
+                                    DetalleLibro(libro:libro)
+                                }
+                        }
                     }
+                                   
                 }
-                               
-            }.navigationBarTitle("Mi Biblioteca", displayMode: .inline)
+                .navigationBarTitle(" .. ")
+                .navigationBarHidden(true)
+            }
         }
         
     }
