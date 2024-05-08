@@ -39,7 +39,7 @@ struct ContentView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: Login()) {
+                NavigationLink(destination: SignUpView()) {
                     Text("Login")
                 }
             }
