@@ -36,7 +36,7 @@ struct Biblioteca: View {
                     }
                                    
                 }
-                .navigationBarTitle(" .. ")
+                .navigationBarTitle(" .. ", displayMode:.inline)
                 .navigationBarHidden(true)
             }
         }

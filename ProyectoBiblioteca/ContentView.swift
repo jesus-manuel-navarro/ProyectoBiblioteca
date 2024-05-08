@@ -11,6 +11,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack{
+                Text("Proyecto Biblioteca")
+                    .font(.title)
+                    .fontWeight(.bold)
+                
                 Image("portadalibros")
                     .resizable()
                     .ignoresSafeArea()
@@ -23,7 +27,7 @@ struct ContentView: View {
             }
             .padding()
         
-        .navigationBarTitle("Proyecto Biblioteca")
+            .navigationBarTitle(" ", displayMode:.inline)
                     
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
